@@ -19,7 +19,6 @@ public class GpholdingApp {
     }
     @Bean
     public CustomShutdown gracefulShutdown() {
-        log.info(" gracefulShutdown ");
         return new CustomShutdown();
     }
 
@@ -27,7 +26,6 @@ public class GpholdingApp {
     public ConfigurableServletWebServerFactory webServerFactory(final CustomShutdown customShutdown) {
         TomcatServletWebServerFactory factory = new TomcatServletWebServerFactory();
         factory.addConnectorCustomizers(customShutdown);
-        log.info(" webServerFactory ");
         return factory;
     }
 }
