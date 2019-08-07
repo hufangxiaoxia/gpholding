@@ -77,7 +77,7 @@ public class EmailServiceImpl implements EmailService {
             message.setRecipient(MimeMessage.RecipientType.TO, new InternetAddress(toMail));
             message.setSubject("verify code");
             MimeBodyPart messageBodyPart = new MimeBodyPart();
-            messageBodyPart.setText("Your code is :9527");
+            messageBodyPart.setText("Your verification code is:" + code);
             Multipart multipart=new MimeMultipart();
             multipart.addBodyPart(messageBodyPart);
             message.setSentDate(Calendar.getInstance().getTime());
