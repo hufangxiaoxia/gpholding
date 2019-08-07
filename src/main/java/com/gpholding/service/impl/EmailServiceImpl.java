@@ -41,12 +41,16 @@ public class EmailServiceImpl implements EmailService {
 
     @Override
     public ResponseResult sendMail(String toMail) {
-        Double code =  (Math.random()*9+1)*1000  ;
+        Long  current = System.currentTimeMillis();
+        String tmp =current.toString();
+        String code =tmp.substring(tmp.length()-4,tmp.length());
+        //int  intValue =current.intValue();
+        //Double code =  (Math.random()*9+1)*1000  ;
         if(StringUtils.isEmpty(toMail)){
             return ResponseResult.build(GpholdingStatic.FAIL_CODE, GpholdingStatic.OBJECT_IS_NULL,null);
         }
         //更新到用户表里
-        int count = userMapper.setEmailVerifyCode(toMail,code.intValue());
+        int count = userMapper.setEmailVerifyCode(toMail,Integer.valueOf(code));
         if (count!=1){
             return ResponseResult.fail("数据库里查无此此人信息，请核实。");
         }
